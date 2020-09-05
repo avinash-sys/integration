@@ -49,6 +49,7 @@ pipeline {
                                 booleanParam(name: 'MOUNT_MAVEN', value: true),
                                 string(name: 'BUILD_BRANCH', value: 'master'),
                                 string(name: 'USER_BUILD_TAG', value: 'N/A'),
+                                 string(name: 'UPSTREAM_BUILD_BRANCH', value: 'develop')
                         ]
             }
         }
