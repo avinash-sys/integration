@@ -38,11 +38,27 @@ properties(
         ]
 )
 
+node {
+    propsFile = readFile("build.properties")
+    props.load(new StringReader(propsFile))
+    designerDockerImageNo = props.get("docker_image_designer")
+    buildUtilsBuildNo = props.get("BuildUtils_ArtifactNO")
+    testUtilsBuildNo = props.getProperty("TestUtils_ArtifactNO")
+    validateBranchName = props.getProperty("validate_BranchName")
+    volbaseBranchName = props.getProperty("volbase_BranchName")
+}
+
 pipeline {
     agent any
+    environment{
+            DEPLOY_TO="$volbaseBranchName"
+        }
     stages {
         stage('build the code') {
             steps {
+                when {
+                      environment name: 'DEPLOY_TO', value: 'master'
+                      }
                 echo "integration is successful"
 		        build job: 'scan',
                         parameters: [
