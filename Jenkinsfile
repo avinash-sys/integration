@@ -1,3 +1,5 @@
+def propsFile = null
+def props = new Properties()
 properties(
         [
                 buildDiscarder(
